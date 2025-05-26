@@ -9,7 +9,6 @@ def predict(df: pd.DataFrame, n: int = 10) -> pd.DataFrame:
     df_f = pd.DataFrame()
 
     for column in df.columns:
-        print (df [column].unique())
         if is_numeric_dtype(df[column]):
             model = sm.OLS(df[column], X).fit()
             new_X = np.arange(len(df)+1, len(df)+1+n).reshape(-1, 1)
