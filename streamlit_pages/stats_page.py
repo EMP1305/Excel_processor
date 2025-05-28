@@ -1,6 +1,6 @@
 from df_show import data_frames
 import streamlit
-from statistic_data import statistic_data
+from data_analysis.statistic_data import statistic_data
 
 for key in data_frames:
     streamlit.write(key)
