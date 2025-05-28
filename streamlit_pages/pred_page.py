@@ -1,6 +1,6 @@
 from df_show import data_frames
 import streamlit
-from predic_data import predict
+from data_analysis.predic_data import predict
 
 n = streamlit.text_input('Cantidad de datos a predecir: ',str())
 for key in data_frames:

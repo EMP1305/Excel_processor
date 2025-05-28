@@ -1,5 +1,5 @@
 import os
-from files_db import data_frame_maker
+from data_analysis.files_db import data_frame_maker
 import streamlit
 
 data_frames = data_frame_maker(os.path.join(streamlit.session_state.path,streamlit.session_state.selected_file))
