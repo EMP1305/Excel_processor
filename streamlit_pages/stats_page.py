@@ -1,4 +1,4 @@
-from df_show import data_frames
+from streamlit_pages.df_show import data_frames
 import streamlit
 from data_analysis.statistic_data import statistic_data
 

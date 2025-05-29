@@ -1,5 +1,5 @@
 import matplotlib.pyplot
-from df_show import data_frames
+from streamlit_pages.df_show import data_frames
 import streamlit
 import pandas
 
