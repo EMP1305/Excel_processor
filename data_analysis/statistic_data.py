@@ -1,4 +1,5 @@
-import pandas
+import pandas as pd
 
-def statistic_data (df:pandas.DataFrame):
-    return df.describe(include=['number'])
+def statistic_data(df: pd.DataFrame) -> pd.DataFrame:
+    """Devuelve estadísticas descriptivas solo para columnas numéricas."""
+    return df.describe(include='number')
