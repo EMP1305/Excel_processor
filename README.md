@@ -4,12 +4,14 @@ Una aplicación web interactiva para el análisis de bases de datos en archivos 
 
 ## Características principales
 
-- 📂 **Explora cualquier carpeta** de tu sistema y detecta automáticamente todos los archivos Excel compatibles (`.xls`, `.xlsx`, `.xlm`).
-- 📰 **Visualiza los datos** de cada hoja de tus archivos Excel como DataFrames de pandas.
-- 💻 **Consulta propiedades técnicas** de los DataFrames (útil para programadores y análisis avanzado).
-- 💾 **Obtén estadísticas descriptivas** de tus datos (media, desviación estándar, percentiles, etc.).
-- 🧮 **Predice valores futuros** usando un modelo de regresión lineal OLS (Ordinary Least Squares).
-- 📉 **Genera gráficos** automáticamente para el análisis visual de tus datos.
+- 📂 **Carga archivos Excel** desde la interfaz web (soporta `.xls`, `.xlsx`, `.xlm`).
+- 📰 **Visualiza los datos** de cada hoja de tus archivos Excel como DataFrames de pandas, con encabezado identificando cada hoja.
+- 💻 **Consulta propiedades técnicas** de los DataFrames (útil para programadores y análisis avanzado), con encabezados claros para cada propiedad.
+- 💾 **Obtén estadísticas descriptivas** de tus datos (media, desviación estándar, percentiles, etc.) por hoja.
+- 🧮 **Predice valores futuros** usando un modelo de regresión lineal OLS (Ordinary Least Squares) para cada hoja y cada columna numérica.
+- 📉 **Genera gráficos** automáticamente para el análisis visual de tus datos:
+  - Comparación entre el último 40% de los datos reales y la predicción OLS sobre ese tramo.
+  - Visualización de todos los datos reales concatenados con los datos predichos.
 
 ## Instalación
 
@@ -34,9 +36,12 @@ Una aplicación web interactiva para el análisis de bases de datos en archivos 
    streamlit run main.py
    ```
 2. En la interfaz web:
-   - Ingresa la ruta de la carpeta donde están tus archivos Excel.
-   - Selecciona el archivo y la hoja que deseas analizar.
-   - Navega entre las diferentes páginas para ver los datos, estadísticas, predicciones y gráficos.
+   - Sube un archivo Excel compatible usando el botón de carga.
+   - Navega entre las diferentes páginas para ver los datos, estadísticas, propiedades, predicciones y gráficos de cada hoja.
+   - En la página de predicción, puedes ajustar la cantidad de datos a predecir y verás:
+     - Un DataFrame con los valores predichos para cada columna numérica.
+     - Un gráfico comparando el último 40% de los datos reales con la predicción OLS sobre ese tramo.
+     - Un gráfico mostrando todos los datos reales concatenados con los datos predichos.
 
 ## Estructura del proyecto
 
@@ -66,3 +71,7 @@ Excel_processor/
 - [matplotlib](https://matplotlib.org/)
 - [statsmodels](https://www.statsmodels.org/)
 - [openpyxl](https://openpyxl.readthedocs.io/)
+
+---
+
+¡Contribuciones y sugerencias son bienvenidas!

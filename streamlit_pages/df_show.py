@@ -12,5 +12,6 @@ if hasattr(session, 'uploaded_file') and session.uploaded_file:
     data_frames = session.data_frames
 
 for key, df in data_frames.items():
+    streamlit.subheader(f"Hoja: {key}")
     streamlit.dataframe(df, hide_index=True)
     streamlit.divider()

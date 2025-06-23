@@ -8,7 +8,7 @@ for key, df in data_frames.items():
     x = df.index.values
     for column in df.select_dtypes(include='number').columns:
         ax.plot(x, df[column], label=column)
-    ax.set_title(key)
+    ax.set_title(f"Hoja: {key}")
     ax.legend()
     streamlit.pyplot(fig)
     streamlit.divider()
