@@ -20,7 +20,7 @@ for key, df in data_frames.items():
         real = df.iloc[-last_40:]
         x_real = range(1,last_40+1)
         fig1, ax1 = plt.subplots()
-        pred = predict(df.iloc[:last_40],last_40)
+        pred = predict(df.iloc[:-last_40],last_40)
         for column in pred.select_dtypes(include='number').columns:
             ax1.plot(x_real, real[column], label=f"Real {column}")
             ax1.plot(x_real, pred[column], '--', label=f"OLS {column}")
