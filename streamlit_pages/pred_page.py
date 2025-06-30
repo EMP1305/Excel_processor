@@ -1,8 +1,7 @@
 import streamlit
 import matplotlib.pyplot as plt
 from data_analysis.predic_data import predict
-import numpy as np
-import statsmodels.api as sm
+import pandas as pd
 
 session = streamlit.session_state
 data_frames = session.get('data_frames', {})
@@ -19,16 +18,12 @@ for key, df in data_frames.items():
     if len(df) > 1:
         last_40 = max(2, int(len(df) * 0.4))  # al menos 2 puntos
         real = df.iloc[-last_40:]
-        x_real = np.arange(len(df) - last_40 + 1, len(df) + 1)
+        x_real = range(1,last_40+1)
         fig1, ax1 = plt.subplots()
-        for col in real.select_dtypes(include='number').columns:
-            # Ajustar modelo OLS sobre el tramo real
-            y = real[col].values
-            X = sm.add_constant(np.arange(1, len(y) + 1).reshape(-1, 1))
-            model = sm.OLS(y, X).fit()
-            y_pred = model.predict(X)
-            ax1.plot(x_real, y, label=f"Real {col}")
-            ax1.plot(x_real, y_pred, '--', label=f"OLS {col}")
+        pred = predict(df.iloc[:last_40],last_40)
+        for column in pred.select_dtypes(include='number').columns:
+            ax1.plot(x_real, real[column], label=f"Real {column}")
+            ax1.plot(x_real, pred[column], '--', label=f"OLS {column}")
         ax1.set_title("Comparación último 40% real vs OLS")
         ax1.legend()
         streamlit.pyplot(fig1)
@@ -36,11 +31,10 @@ for key, df in data_frames.items():
     # Gráfico 2: todos los datos reales + predicción
     if len(df) > 0 and not pred_df.empty:
         fig2, ax2 = plt.subplots()
-        for col in df.select_dtypes(include='number').columns:
-            ax2.plot(range(1, len(df) + 1), df[col].values, label=f"Real {col}")
-            if col + '_pred' in pred_df:
-                x_pred = range(len(df) + 1, len(df) + 1 + len(pred_df))
-                ax2.plot(x_pred, pred_df[col + '_pred'].values, '--', label=f"Predicción {col}")
+        for column in df.select_dtypes(include='number').columns:
+            ax2.plot(range(1, len(df) + 1), df[column].values, label=f"Real {column}")
+            x_pred = range(len(df) + 1, len(df) + 1 + len(pred_df))
+            ax2.plot(x_pred, pred_df[column].values, '--', label=f"Predicción {column}")
         ax2.set_title("Datos reales + predicción futura")
         ax2.legend()
         streamlit.pyplot(fig2)

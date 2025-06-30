@@ -1,7 +1,9 @@
 import streamlit
 import matplotlib.pyplot as plt
 import pandas as pd
-from streamlit_pages.df_show import data_frames
+
+session = streamlit.session_state
+data_frames = session.get('data_frames',{})
 
 for key, df in data_frames.items():
     fig, ax = plt.subplots()

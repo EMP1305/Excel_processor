@@ -13,5 +13,5 @@ def predict(df: pd.DataFrame, n: int = 10) -> pd.DataFrame:
     for column in df.select_dtypes(include='number').columns:
         model = sm.OLS(df[column], X).fit()
         new_X = sm.add_constant(np.arange(len(df) + 1, len(df) + n + 1).reshape(-1, 1))
-        result[column + '_pred'] = model.predict(new_X)
+        result[column] = model.predict(new_X)
     return pd.DataFrame(result)
